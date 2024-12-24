@@ -2,7 +2,7 @@ Kelas: IF-11-01
 Nama Anggota Kelompok:
 
 1. Arsya Fathiha Rahman (2311102152)
-2. Grashela Ayudia Prameswari (2311102315)
+2. Grashela Ayudia Prameswari (2311102318)
 
  Penjelasan Program:
 
