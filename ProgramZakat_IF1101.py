@@ -1,100 +1,120 @@
 import time
 import matplotlib.pyplot as plt
 
-def hitung_zakat_rekursif(gaji):
-    if gaji <= 0:
+# Fungsi menghitung zakat penghasilan dari gaji
+def hitung_zakat(gaji):
+    return gaji * 0.025
+
+# Fungsi rekursif untuk menghitung zakat
+def total_zakat_recursive(n, gaji_list):
+    if n == 0:
         return 0
-    return 0.025 * gaji
+    return hitung_zakat(gaji_list[n-1]) + total_zakat_recursive(n-1, gaji_list)
 
-def hitung_zakat_iteratif(gaji):
-    zakat = 0
-    if gaji > 0:
-        zakat = 0.025 * gaji
-    return zakat
+# Fungsi iteratif untuk menghitung zakat
+def total_zakat_iterative(gaji_list):
+    total_zakat = 0
+    for gaji in gaji_list:
+        total_zakat += hitung_zakat(gaji)
+    return total_zakat
 
-def tampilkan_hasil(gaji, zakat_rekursif, waktu_rekursif, zakat_iteratif, waktu_iteratif):
-    print("\nHasil Perhitungan Zakat:\n")
-    print("+------------------+------------------------+---------------------+------------------------+---------------------+")
-    print("| Gaji (IDR)       | Zakat Rekursif (IDR)  | Waktu Rekursif (s)  | Zakat Iteratif (IDR)  | Waktu Iteratif (s)    |")
-    print("+------------------+------------------------+---------------------+------------------------+---------------------+")
-    for i in range(len(gaji)):
-        print(f"| {gaji[i]:<16,} | {zakat_rekursif[i]:<22,.2f} | {waktu_rekursif[i]:<19.6f} | {zakat_iteratif[i]:<22,.2f} | {waktu_iteratif[i]:<19.6f} |")
-    print("+------------------+------------------------+---------------------+------------------------+---------------------+")
+# Data dummy untuk 25 orang dengan gaji tertentu
+gaji_list = [
+    1500000, 2000000, 2500000, 3000000, 3500000, 
+    4000000, 4500000, 5000000, 5500000, 6000000, 
+    6500000, 7000000, 7500000, 8000000, 8500000, 
+    9000000, 9500000, 10000000, 10500000, 11000000,
+    11500000, 12000000, 12500000, 13000000, 13500000
+]
 
-def plot_grafik(gaji, waktu_rekursif, waktu_iteratif):
-    plt.figure(figsize=(10, 6))
-    plt.plot(gaji, waktu_rekursif, marker='o', label='Rekursif', color='blue')
-    plt.plot(gaji, waktu_iteratif, marker='x', label='Iteratif', color='red')
-    plt.title("Perbandingan Waktu Eksekusi Rekursif vs Iteratif Program zakat")
-    plt.xlabel("Gaji (IDR)")
-    plt.ylabel("Waktu Eksekusi (s)")
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
+# Menampilkan data dummy awal
+print("\nDaftar Gaji yang Tersedia:")
+for idx, gaji in enumerate(gaji_list, 1):
+    print(f"{idx}. Gaji: Rp {gaji}")
 
-def main():
-    gaji = []
-    zakat_rekursif = []
-    waktu_rekursif = []
-    zakat_iteratif = []
-    waktu_iteratif = []
-
-    while True:
-        print("\n====== Menu Program Zakat ====== :")
-        print("1. Masukkan Data Gaji")
-        print("2. Tampilkan Hasil dan Grafik")
-        print("3. Keluar")
-        print("===================================")
-
-        pilihan = input("Pilih opsi (1/2/3): ")
-
-        if pilihan == "1":
-            try:
-                jumlah_data = int(input("Masukkan jumlah data gaji yang akan dihitung: "))
-
-                for _ in range(jumlah_data):
-                    nilai_gaji = float(input("Masukkan jumlah gaji penghasilan Anda (dalam IDR): "))
-
-                    if nilai_gaji < 0:
-                        print("Gaji tidak boleh negatif. Silakan coba lagi.")
-                        continue
-
-                    # Rekursif
-                    start = time.time()
-                    zakat_r = hitung_zakat_rekursif(nilai_gaji)
-                    end = time.time()
-                    waktu_r = end - start
-
-                    # Iteratif
-                    start = time.time()
-                    zakat_i = hitung_zakat_iteratif(nilai_gaji)
-                    end = time.time()
-                    waktu_i = end - start
-
-                    gaji.append(nilai_gaji)
-                    zakat_rekursif.append(zakat_r)
-                    waktu_rekursif.append(waktu_r)
-                    zakat_iteratif.append(zakat_i)
-                    waktu_iteratif.append(waktu_i)
-
-            except ValueError:
-                print("Input tidak valid. Harap masukkan angka yang benar untuk gaji.")
-
-        elif pilihan == "2":
-            if not gaji:
-                print("Belum ada data gaji yang dimasukkan. Silakan pilih opsi 1 terlebih dahulu.")
-                continue
-
-            tampilkan_hasil(gaji, zakat_rekursif, waktu_rekursif, zakat_iteratif, waktu_iteratif)
-            plot_grafik(gaji, waktu_rekursif, waktu_iteratif)
-
-        elif pilihan == "3":
-            print("Terima kasih telah menggunakan program ini. Program selesai.")
+# Input jumlah data yang ingin dihitung
+print("\nMasukkan jumlah data yang ingin dihitung dan diurutkan pencarian (1-25):")
+while True:
+    try:
+        jumlah_data = int(input("Masukkan jumlah data (1-25): "))
+        if 1 <= jumlah_data <= 25:
             break
-
         else:
-            print("Pilihan tidak valid. Silakan pilih menu yang tersedia.")
+            print("Jumlah data harus antara 1 dan 25. Coba lagi.")
+    except ValueError:
+        print("Masukkan angka yang valid.")
 
-if __name__ == "__main__":
-    main()
+# Input beberapa nilai n yang ingin dihitung dari data
+n_values_input = []
+print(f"\nMasukkan beberapa nilai n yang ingin dihitung (1 sampai {len(gaji_list)}):")
+for i in range(jumlah_data):  # Input sesuai jumlah_data yang dipilih
+    while True:
+        try:
+            n = int(input(f"Masukkan n ke-{i + 1} (1-{len(gaji_list)}): "))
+            if 1 <= n <= len(gaji_list):
+                n_values_input.append(n)
+                break
+            else:
+                print(f"Jumlah n harus antara 1 dan {len(gaji_list)}. Coba lagi.")
+        except ValueError:
+            print("Masukkan angka yang valid.")
+
+# Menampilkan gaji yang dipilih untuk dihitung zakatnya
+print(f"\nGaji yang akan dihitung zakatnya (Jumlah data: {jumlah_data}):")
+for i in n_values_input:
+    print(f"Nomor {i}. Gaji: Rp {gaji_list[i - 1]}")
+
+# Variabel untuk menyimpan hasil
+recursive_times = []
+iterative_times = []
+
+# Loop untuk menghitung waktu eksekusi untuk setiap nilai n yang dimasukkan
+print("\nMemproses data...")
+for n in n_values_input:  # Untuk setiap nilai n yang dimasukkan
+    # Hitung waktu rekursif
+    start_recursive = time.time()
+    total_zakat_recursive(n, gaji_list[:n])
+    recursive_time = time.time() - start_recursive
+
+    # Hitung waktu iteratif
+    start_iterative = time.time()
+    total_zakat_iterative(gaji_list[:n])
+    iterative_time = time.time() - start_iterative
+
+    # Simpan hasil
+    recursive_times.append(recursive_time)
+    iterative_times.append(iterative_time)
+
+# Cetak hasil
+print("\n+-----+---------------------------+---------------------------+")
+print("|  n  |   Recursive Time (s)      |   Iterative Time (s)      |")
+print("+-----+---------------------------+---------------------------+")
+for i in range(len(n_values_input)):
+    print(f"| {n_values_input[i]:<4} | {recursive_times[i]:<24.10f} | {iterative_times[i]:<24.10f}  |")
+print("+-----+---------------------------+---------------------------+")
+
+# Tampilkan grafik hasil
+plt.figure(figsize=(8, 6))
+plt.plot(n_values_input, recursive_times, label='Recursive Time', marker='o', linestyle='-')
+plt.plot(n_values_input, iterative_times, label='Iterative Time', marker='o', linestyle='--')
+plt.title('Perbandingan Waktu Eksekusi (Rekursif vs Iteratif) pada Bubble Sort Program Menghitung Zakat Penghasilan (2,5%)')
+plt.xlabel('Jumlah Orang (n)')
+plt.ylabel('Execution Time (seconds)')
+
+# Menambahkan label untuk nilai-nilai waktu pada grafik
+for i in range(len(n_values_input)):
+    # Menampilkan waktu di sebelah kiri titik data
+    plt.text(n_values_input[i], recursive_times[i] + 0.00000001, f'{recursive_times[i]:.10f}', ha='center', va='bottom', fontsize=9)
+    plt.text(n_values_input[i], iterative_times[i] + 0.00000001, f'{iterative_times[i]:.10f}', ha='center', va='bottom', fontsize=9)
+
+
+
+# Menyesuaikan skala sumbu Y untuk rentang waktu kecil
+plt.yscale('log')
+
+# Menambahkan nilai pada sumbu Y untuk rentang yang lebih tepat
+plt.yticks([0.000005, 0.00001, 0.00002, 0.00005, 0.0001], ["0.000005", "0.00001", "0.00002", "0.00005", "0.0001"])
+
+plt.legend()
+plt.grid(True)
+plt.show()
