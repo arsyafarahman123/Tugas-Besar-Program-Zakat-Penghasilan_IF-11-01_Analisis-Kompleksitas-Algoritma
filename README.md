@@ -1,7 +1,7 @@
-Kelas: IF-11-01
-Nama Anggota Kelompok:
 
 # Tugas Akhir: Analisis Kompleksitas Algoritma
+
+## Kelas: IF-11-01
 
 ## Anggota Kelompok:
 - **Arsya Fathiha Rahman** (2311102152)
