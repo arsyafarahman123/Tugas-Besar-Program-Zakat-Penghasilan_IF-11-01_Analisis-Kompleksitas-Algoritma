@@ -25,10 +25,20 @@ Analisis Kinerja:
 Perbandingan Performa Dari hasil perbandingan waktu eksekusi, dapat dilihat bahwa metode iteratif cenderung lebih efisien dibandingkan dengan metode rekursif, terutama untuk jumlah data yang lebih besar. Waktu eksekusi iteratif lebih cepat karena tidak melibatkan overhead pemanggilan fungsi berulang yang terjadi pada metode rekursif.
 
 ## Fitur Utama
-- Implementasi algoritma **Sequential Search** menggunakan **iteratif** dan **rekursif**.
-- Pengguna diminta untuk memasukkan jumlah pasien (n) dan kelas BPJS yang ingin dicari (kelas 1, 2, atau 3).
-- Kemudian, program akan menampilkan data perbandingannya ke dalam tabel.
-- Setelah, ditambilkan tabelnya program akan membentuknya ke dalam grafik perbanfingan iteratif vs rekursif.
+- Sorting Gaji
+Mengurutkan data gaji karyawan dengan dua metode: Bubble Sort Iteratif dan Rekursif.
+
+- Perbandingan Waktu
+Menghitung waktu eksekusi untuk kedua metode sorting dan menampilkan hasilnya.
+
+- Grafik Visualisasi
+Menampilkan grafik perbandingan waktu eksekusi berdasarkan jumlah data.
+
+- Input Fleksibel
+Jumlah data yang diuji bisa disesuaikan sesuai kebutuhan pengguna.
+
+- Detail Hasil
+Grafik dilengkapi label waktu eksekusi untuk setiap jumlah data yang diuji.
 
 ```python
 # Fungsi Bubble Sort Iteratif
