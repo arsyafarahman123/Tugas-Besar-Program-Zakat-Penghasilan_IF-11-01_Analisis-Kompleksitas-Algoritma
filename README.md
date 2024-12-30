@@ -1,5 +1,5 @@
 
-# Tugas Akhir: Analisis Kompleksitas Algoritma
+# Tugas Besar: Analisis Kompleksitas Algoritma
 
 ## Kelas: IF-11-01
 
